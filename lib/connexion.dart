@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'listeBureaux.dart';
 
@@ -46,8 +45,6 @@ class _ConnexionFormState extends State<connexionForm> {
     Future userLogin() async {
       //Login API URL
       print("userLogin");
-      //use your local IP address instead of localhost or use Web API
-     // Uri url = Uri.parse('localhost/login_api/login_user.php');
 
       Uri url = Uri.parse("http://127.0.0.1:9001/user/login");
       print (url.port.toString());
@@ -70,7 +67,6 @@ class _ConnexionFormState extends State<connexionForm> {
         var theBody = jsonEncode(data);
         return theBody;
       }
-   //   Future<http.Response> postRequest () async {
       var response = await http.post(url,
           headers:{"Content-Type":"application/json"},
           body: myBody());
@@ -105,11 +101,6 @@ class _ConnexionFormState extends State<connexionForm> {
               textColor: Colors.red,
               webShowClose: true
             );
-          //      child: Text('Mail ou mot de passe  invalide',
-            //        style: TextStyle(fontSize: 25, color: Colors.red);
-
-            //mot de pShow Error Message Dialog
-               //  showMessage(msg["message"]);
           });
         }
       } else {
@@ -124,12 +115,12 @@ class _ConnexionFormState extends State<connexionForm> {
 
     }
     return Form(
-     // onChanged: _updateFormProgress,
+      onChanged: _updateFormProgress,
       key: _formKey,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-         // LinearProgressIndicator(value: _visible),
+       //  LinearProgressIndicator(value: _visible),
           Text('Connexion', style: Theme
               .of(context)
               .textTheme
@@ -154,18 +145,6 @@ class _ConnexionFormState extends State<connexionForm> {
               obscureText: true,
               controller: _pwdController,
               decoration: const InputDecoration(labelText: 'Mot de passe'
-  /*            suffixIcon: IconButton(
-                  icon: Icon(
-                      Icons.visibility_off_outlined),
-                onPressed: () {
-                setState(() {
-                  passwordHidden = !passwordHidden;
-                });
-              },
-
-
-    ),
-*/
             ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
